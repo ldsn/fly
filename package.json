@@ -1,0 +1,32 @@
+{
+  "name": "fly",
+  "version": "1.0.0",
+  "description": "FLY 鲁大学生网数据文档管理平台",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ldsn/fly.git"
+  },
+  "keywords": [
+    "ldsn"
+  ],
+  "author": "lidongjies@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ldsn/fly/issues"
+  },
+  "homepage": "https://github.com/ldsn/fly#readme",
+  "dependencies": {
+    "fastify": "^0.33.0",
+    "ramda": "^0.25.0",
+    "split2": "^2.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.11.0",
+    "nodemon": "^1.12.1"
+  }
+}

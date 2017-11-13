@@ -22,8 +22,10 @@
   "homepage": "https://github.com/ldsn/fly#readme",
   "dependencies": {
     "fastify": "^0.33.0",
+    "minimist": "^1.2.0",
     "ramda": "^0.25.0",
-    "split2": "^2.2.0"
+    "request": "^2.83.0",
+    "tap": "^10.7.3"
   },
   "devDependencies": {
     "eslint": "^4.11.0",

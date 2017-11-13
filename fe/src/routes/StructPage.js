@@ -5,7 +5,7 @@ import Layout from '../components/Layout';
 
 
 
-function ConfigPage({ content, id, dispatch }) {
+function StructPage({ content, id, dispatch }) {
   const props = {
     content,
     del() {
@@ -17,15 +17,14 @@ function ConfigPage({ content, id, dispatch }) {
   }
   return ( 
     <Layout>
-        
     </Layout>
   );
 }
 
-ConfigPage.propTypes = {};
+StructPage.propTypes = {};
 
 
 
 export default connect(({ config }) => {
   return { ...config }
-})(ConfigPage);
+})(StructPage);

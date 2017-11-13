@@ -14,3 +14,48 @@
 
 ### test
 `npm run test`
+
+
+### 创建一条数据
+
+/api/create
+
+```javascript
+{
+    type [required]
+    content [required]
+    struct [optional]
+}
+```
+
+### 更新某条数据
+
+/api/update
+
+```javascript
+{
+    content [optional]
+    struct [optional]
+}
+```
+### 获取某条
+
+/api/fetch
+
+```javascript
+{
+    id [optional]
+}
+```
+
+###获取列表
+
+/api/list
+
+```javascript
+{
+    type [required]
+    pageid [optional]
+    pagesize [optional]
+}
+```

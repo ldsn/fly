@@ -1,10 +1,16 @@
 'use strict';
 const log = require('pino')({ level: 'info' });
 const minimist = require('minimist');
+const helmet = require('fastify-helmet');
+const mongodb = require('fastify-mongodb');
 const fastify = require('fastify')({ logger: log });
 
-// register route plugin
-fastify.register(require('./route/user'), { prefix: '/api' });
+// register plugin
+fastify.register(helmet);
+// fastify.register(mongodb, {
+//   url: 'mongodb://mongo/db',
+// })
+fastify.register(require('./route/index'), { prefix: '/api' });
 
 // hooks
 // fastify.addHook('onRequest', async (req, res) => {});
@@ -26,10 +32,6 @@ fastify.setErrorHandler(setErrorHandler);
 // function called when all the plugins has been loaded. It takes an error parameter if somthing went wrong
 fastify.ready(err => {
   if (err) throw err;
-  // fastify iterator for route
-  // for (let route of fastify) {
-  // console.log(route);
-  // }
 });
 
 function start(opts, callback) {

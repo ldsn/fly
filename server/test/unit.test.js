@@ -18,6 +18,7 @@ server.start({ port: 0 }, (err, fastify) => {
         t.strictEqual(response.statusCode, 200);
         t.strictEqual(response.headers['content-length'], '' + body.length);
         t.deepEqual(JSON.parse(body), { hello: 'world' });
+        fastify.close();
       },
     );
   });

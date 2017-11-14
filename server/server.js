@@ -1,15 +1,20 @@
 'use strict';
 const log = require('pino')({ level: 'info' });
 const minimist = require('minimist');
-const helmet = require('fastify-helmet');
-const mongodb = require('fastify-mongodb');
 const fastify = require('fastify')({ logger: log });
+const config = require('./config/index');
 
 // register plugin
-fastify.register(helmet);
-// fastify.register(mongodb, {
-//   url: 'mongodb://mongo/db',
-// })
+fastify.register(require('fastify-helmet'));
+fastify.register(
+  require('fastify-mongoose'),
+  {
+    uri: config.mongodb
+  },
+  err => {
+    if (err) throw err;
+  }
+);
 fastify.register(require('./route/index'), { prefix: '/api' });
 
 // hooks
@@ -17,6 +22,9 @@ fastify.register(require('./route/index'), { prefix: '/api' });
 // fastify.addHook('preHandler', async (request, reply) => {});
 // fastify.addHook('onSend', async (request, reply, payload) => {});
 // fastify.addHook('onResponse', async res => {});
+// fastify.addHook('onClose', (instance, done) => {
+//   done();
+// });
 
 // set the 404 handler
 function notFoundHandler(request, reply) {
@@ -47,16 +55,17 @@ if (require.main === module) {
     minimist(process.argv.slice(2), {
       integer: ['port'],
       alias: {
-        port: 'p',
+        port: 'p'
       },
       default: {
-        port: 3000,
-      },
+        port: 3000
+      }
     }),
     (err, instance) => {
       if (err) throw err;
+      // eslint-disable-next-line
       console.log(`server listening on ${instance.server.address().port}`);
-    },
+    }
   );
 }
 

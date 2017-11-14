@@ -10,8 +10,8 @@ module.exports = {
       ignore_watch: [
         './.vscode',
         './test/*.js',
-        'node_modules',
-        'momgodb',
+        'node_modules/*',
+        'momgodb/*',
         'logs',
         '.editorconfig',
         '.eslintrc.json',

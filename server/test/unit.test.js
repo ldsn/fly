@@ -11,7 +11,7 @@ server.start({ port: 0 }, (err, fastify) => {
     request(
       {
         method: 'GET',
-        uri: `http://localhost:${fastify.server.address().port}/api/user/list`,
+        uri: `http://localhost:${fastify.server.address().port}/api/test`,
       },
       (err, response, body) => {
         t.error(err);

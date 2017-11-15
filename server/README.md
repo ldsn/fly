@@ -17,11 +17,6 @@
 
 ## API
 
-### common reply
-
-* errno {Number} - 自定义出错码
-* errmsg {String} - 错误信息
-
 ### POST /api/create
 
 创建数据
@@ -30,6 +25,11 @@ Request body:
  * type {String} - 数据类型
  * content {String} - 数据内容
  * struct {String} - 数据结构
+
+Response:
+ * errno {Number} - 自定义出错码
+ * errmsg {String} - 错误信息
+ * data {string} - 数据id
 
 
 ### PUT /api/update/:id
@@ -41,6 +41,8 @@ Request body:
  * contnet {String} - 数据内容
  * struct {String} - 数据结构
 
+Response: 204 not content
+
 ### GET /api/fetch/:id
 
 获取数据
@@ -49,7 +51,7 @@ Url params:
  * id {Number} - 数据id
 
 Response type:
- * data {Data} - a instance of Data
+ * content {Data.content} - 数据内容
 
 ### GET /api/list
 

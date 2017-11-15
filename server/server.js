@@ -1,5 +1,5 @@
 'use strict';
-const log = require('pino')({ level: 'info' });
+const log = require('pino')({ level: 'error' });
 const minimist = require('minimist');
 const fastify = require('fastify')({ logger: log });
 const config = require('./config/index');
@@ -32,8 +32,13 @@ function notFoundHandler(request, reply) {
 }
 fastify.setNotFoundHandler(notFoundHandler);
 // will be called whenever an error happens, different set different error handlers
-function setErrorHandler(request, reply) {
-  reply.send('error happend');
+function setErrorHandler(err, reply) {
+  const detail = JSON.parse(err.message);
+  if (Array.isArray(detail)) {
+    reply.send({ errno: 1001, errmsg: detail[0].message });
+  } else {
+    reply.send({ errno: 1001, errmsg: '位置错误' });
+  }
 }
 fastify.setErrorHandler(setErrorHandler);
 

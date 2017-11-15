@@ -1,15 +1,34 @@
+const allowMIMETypes = ['application/json', 'text/html', 'text/plain'];
+
 exports.create = async (request, reply) => {
   const RyeModel = request.RyeModel;
   const post = request.body;
-  const rye = new RyeModel(post);
-  const result = await rye.save();
-  reply.send({ errno: 0, errmsg: 'success', data: result._id });
+  if (~allowMIMETypes.findIndex(type => post.type === type)) {
+    const rye = new RyeModel(post);
+    const result = await rye.save();
+    reply
+      .code(201)
+      .type('application/json')
+      .send({ errno: 0, errmsg: 'success', data: result._id });
+    return;
+  }
+  reply
+    .code(400)
+    .type('text/plain')
+    .send('Bad Request');
 };
 
 exports.fetch = async (request, reply) => {
   const RyeModel = request.RyeModel;
   const id = request.params.id;
   const result = await RyeModel.findOne({ _id: id });
+  if (!result) {
+    reply
+      .code(404)
+      .type('text/plain')
+      .send('NOT FOUND');
+    return;
+  }
   reply
     .code(200)
     .type(result.type)
@@ -25,11 +44,16 @@ exports.list = async (request, reply) => {
     .limit(pageSize + 1)
     .where({ type })
     .sort({ update: -1 })
-    .select('content _id struct');
+    .select('_id content struct create update');
+  if (!list.length) {
+    reply.code(204).send();
+    return;
+  }
   const total = await RyeModel.where({ type }).count();
   if (list.length > pageSize) {
     hasNext = true;
   }
+  list.pop();
   reply.send({ list, hasNext, total });
 };
 
@@ -41,8 +65,8 @@ exports.update = async (request, reply) => {
     .update(post)
     .then(({ ok }) => ok === 1);
   if (result) {
-    reply.send({ errno: 0, errmsg: 'success' });
-  } else {
-    reply.send({ errno: 1000, errmsg: 'faild' });
+    reply.code(204).send();
+    return;
   }
+  reply.send({ errno: 1000, errmsg: 'faild' });
 };

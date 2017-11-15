@@ -29,48 +29,9 @@ exports.create = {
             type: 'string'
           }
         }
-      }
-    }
-  }
-};
-
-exports.update = {
-  schema: {
-    body: {
-      type: 'object',
-      properties: {
-        type: {
-          type: 'string'
-        },
-        content: {
-          type: 'string'
-        },
-        struct: {
-          type: 'string'
-        }
       },
-      required: ['type', 'content', 'struct']
-    },
-    params: {
-      type: 'object',
-      properties: {
-        id: {
-          type: 'string'
-        }
-      },
-      required: ['id']
-    },
-    response: {
-      200: {
-        type: 'object',
-        properties: {
-          errno: {
-            type: 'integer'
-          },
-          errmsg: {
-            type: 'string'
-          }
-        }
+      400: {
+        type: 'string'
       }
     }
   }
@@ -132,6 +93,12 @@ exports.list = {
                 },
                 struct: {
                   type: 'string'
+                },
+                update: {
+                  type: 'string'
+                },
+                create: {
+                  type: 'string'
                 }
               }
             }
@@ -141,6 +108,47 @@ exports.list = {
           },
           total: {
             type: 'integer'
+          }
+        }
+      }
+    }
+  }
+};
+exports.update = {
+  schema: {
+    body: {
+      type: 'object',
+      properties: {
+        type: {
+          type: 'string'
+        },
+        content: {
+          type: 'string'
+        },
+        struct: {
+          type: 'string'
+        }
+      },
+      required: ['type', 'content', 'struct']
+    },
+    params: {
+      type: 'object',
+      properties: {
+        id: {
+          type: 'string'
+        }
+      },
+      required: ['id']
+    },
+    response: {
+      200: {
+        type: 'object',
+        properties: {
+          errno: {
+            type: 'integer'
+          },
+          errmsg: {
+            type: 'string'
           }
         }
       }

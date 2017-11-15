@@ -1,14 +1,12 @@
 const schema = require('../schema/index');
 const controller = require('../ctrl/index');
-const { RyeSchema } = require('../model/index');
+const registModel = require('../model/index');
 
 module.exports = (fastify, options, next) => {
-  const RyeModel = fastify.mongo.db.model('RyeModel', RyeSchema);
-  fastify.decorateRequest('RyeModel', RyeModel);
-
+  fastify.register(registModel);
+  fastify.get('/list', schema.list, controller.list);
+  fastify.get('/fetch/:id', schema.fetch, controller.fetch);
   fastify.post('/create', schema.create, controller.create);
-  // fastify.put('/update/:id');
-  // fastify.get('/fetch/:id');
-  // fastify.get('/list');
+  fastify.put('/update/:id', schema.update, controller.update);
   next();
 };

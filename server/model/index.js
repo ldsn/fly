@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const fp = require('fastify-plugin');
+const ryeSchema = require('./rye');
+// .. other schema
 
-const RyeSchema = new Schema({
-  type: String,
-  content: String,
-  struct: String,
-  create: { type: Date, default: Date.now() },
-  update: { type: Date, default: Date.now() }
-});
+function registModel(fastify, options, next) {
+  const RyeModel = fastify.mongo.db.model('rye', ryeSchema);
+  fastify.decorateRequest('RyeModel', RyeModel);
+  // ... other Model
+  next();
+}
 
-exports.RyeSchema = RyeSchema;
+module.exports = fp(registModel);

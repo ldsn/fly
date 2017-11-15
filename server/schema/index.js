@@ -12,7 +12,8 @@ exports.create = {
         struct: {
           type: 'string'
         }
-      }
+      },
+      required: ['type', 'content', 'struct']
     },
     response: {
       201: {
@@ -47,7 +48,8 @@ exports.update = {
         struct: {
           type: 'string'
         }
-      }
+      },
+      required: ['type', 'content', 'struct']
     },
     params: {
       type: 'object',
@@ -55,7 +57,8 @@ exports.update = {
         id: {
           type: 'string'
         }
-      }
+      },
+      required: ['id']
     },
     response: {
       200: {
@@ -81,7 +84,8 @@ exports.fetch = {
         id: {
           type: 'string'
         }
-      }
+      },
+      required: ['id']
     },
     response: {
       200: {
@@ -97,15 +101,19 @@ exports.fetch = {
 exports.list = {
   schema: {
     querystring: {
-      page: {
-        type: 'integer'
+      type: 'object',
+      properties: {
+        page: {
+          type: 'integer'
+        },
+        pageSize: {
+          type: 'integer'
+        },
+        type: {
+          type: 'string'
+        }
       },
-      pageSize: {
-        type: 'integer'
-      },
-      type: {
-        type: 'string'
-      }
+      required: ['page', 'pageSize']
     },
     response: {
       200: {
@@ -114,7 +122,18 @@ exports.list = {
           list: {
             type: 'array',
             items: {
-              type: 'string'
+              type: 'object',
+              properties: {
+                _id: {
+                  type: 'string'
+                },
+                content: {
+                  type: 'string'
+                },
+                struct: {
+                  type: 'string'
+                }
+              }
             }
           },
           hasNext: {

@@ -5,16 +5,13 @@
   "main": "./server.js",
   "scripts": {
     "start": "pm2 startOrRestart ./ecosystem.pro.config.js",
-    "dev": "pm2 startOrRestart ./ecosystem.dev.config.js",
-    "test": "cross-env NODE_ENV=test node ./test/unit.test.js"
+    "dev": "pm2 startOrRestart ./ecosystem.dev.config.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ldsn/fly.git"
   },
-  "keywords": [
-    "ldsn"
-  ],
+  "keywords": ["ldsn", "fastify"],
   "author": "lidongjies@gmail.com",
   "license": "MIT",
   "bugs": {
@@ -30,7 +27,6 @@
     "ramda": "^0.25.0"
   },
   "devDependencies": {
-    "cross-env": "^5.1.1",
     "eslint": "^4.11.0",
     "pm2": "^2.7.2",
     "request": "^2.83.0",

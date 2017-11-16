@@ -15,8 +15,9 @@ module.exports = {
         'logs',
         '.editorconfig',
         '.eslintrc.json',
-        'package.json',
+        '.gitignore',
         'package-lock.json',
+        'package.json',
         'README.md'
       ],
       env: {

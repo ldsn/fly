@@ -1,24 +1,24 @@
-const allowMIMETypes = ['application/json', 'text/html', 'text/plain'];
+const { checkMIMETypes } = require('../util/index');
 
-exports.create = async (request, reply) => {
+exports.createAction = async (request, reply) => {
   const RyeModel = request.RyeModel;
   const post = request.body;
-  if (~allowMIMETypes.findIndex(type => post.type === type)) {
-    const rye = new RyeModel(post);
-    const result = await rye.save();
+  if (!checkMIMETypes(post.type)) {
     reply
-      .code(201)
-      .type('application/json')
-      .send({ errno: 0, errmsg: 'success', data: result._id });
+      .code(400)
+      .type('text/plain')
+      .send('Bad Request');
     return;
   }
+  const rye = new RyeModel(post);
+  const result = await rye.save();
   reply
-    .code(400)
-    .type('text/plain')
-    .send('Bad Request');
+    .code(201)
+    .type('application/json')
+    .send({ errno: 0, errmsg: 'success', data: result._id });
 };
 
-exports.fetch = async (request, reply) => {
+exports.fetchAction = async (request, reply) => {
   const RyeModel = request.RyeModel;
   const id = request.params.id;
   const result = await RyeModel.findOne({ _id: id });
@@ -35,7 +35,7 @@ exports.fetch = async (request, reply) => {
     .send(result.content);
 };
 
-exports.list = async (request, reply) => {
+exports.listAction = async (request, reply) => {
   const RyeModel = request.RyeModel;
   const { page = 1, pageSize = 5, type = 'application/json' } = request.query;
   let hasNext = false;
@@ -52,21 +52,21 @@ exports.list = async (request, reply) => {
   const total = await RyeModel.where({ type }).count();
   if (list.length > pageSize) {
     hasNext = true;
+    list.pop();
   }
-  list.pop();
   reply.send({ list, hasNext, total });
 };
 
-exports.update = async (request, reply) => {
+exports.updateAction = async (request, reply) => {
   const RyeModel = request.RyeModel;
   const id = request.params.id;
   const post = request.body;
   const result = await RyeModel.where({ _id: id })
     .update(post)
     .then(({ ok }) => ok === 1);
-  if (result) {
-    reply.code(204).send();
+  if (!result) {
+    reply.send({ errno: 1000, errmsg: 'faild' });
     return;
   }
-  reply.send({ errno: 1000, errmsg: 'faild' });
+  reply.code(204).send();
 };

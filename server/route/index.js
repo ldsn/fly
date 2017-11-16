@@ -4,9 +4,9 @@ const registModel = require('../model/index');
 
 module.exports = (fastify, options, next) => {
   fastify.register(registModel);
-  fastify.get('/list', schema.list, controller.list);
-  fastify.get('/fetch/:id', schema.fetch, controller.fetch);
-  fastify.post('/create', schema.create, controller.create);
-  fastify.put('/update/:id', schema.update, controller.update);
+  fastify.get('/list', schema.list, controller.listAction);
+  fastify.get('/fetch/:id', schema.fetch, controller.fetchAction);
+  fastify.post('/create', schema.create, controller.createAction);
+  fastify.put('/update/:id', schema.update, controller.updateAction);
   next();
 };

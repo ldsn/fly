@@ -17,15 +17,6 @@ fastify.register(
 );
 fastify.register(require('./route/index'), { prefix: '/api' });
 
-// hooks
-// fastify.addHook('onRequest', async (req, res) => {});
-// fastify.addHook('preHandler', async (request, reply) => {});
-// fastify.addHook('onSend', async (request, reply, payload) => {});
-// fastify.addHook('onResponse', async res => {});
-// fastify.addHook('onClose', (instance, done) => {
-//   done();
-// });
-
 // set the 404 handler
 function notFoundHandler(request, reply) {
   reply.send('NOT FOUND');
@@ -37,12 +28,13 @@ function setErrorHandler(err, reply) {
   if (Array.isArray(detail)) {
     reply.send({ errno: 1001, errmsg: detail[0].message });
   } else {
-    reply.send({ errno: 1001, errmsg: '位置错误' });
+    reply.send({ errno: 1001, errmsg: '未知错误' });
   }
 }
 fastify.setErrorHandler(setErrorHandler);
 
-// function called when all the plugins has been loaded. It takes an error parameter if somthing went wrong
+// function called when all the plugins has been loaded.
+// It takes an error parameter if somthing went wrong
 fastify.ready(err => {
   if (err) throw err;
 });
@@ -54,8 +46,8 @@ function start(opts, callback) {
 }
 
 // in this way you can run the server both from the cli and as a requrie module.
+// run the server with: $ node server.js -p 8080
 if (require.main === module) {
-  // run the server with: $ node server.js -p 8080
   start(
     minimist(process.argv.slice(2), {
       integer: ['port'],

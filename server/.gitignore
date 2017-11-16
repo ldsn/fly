@@ -1,5 +1,11 @@
-node_modules/*
-logs/*
+# logs
+logs
+*.log
+
+# node_modules
+node_modules
+
+# mongodb
 local.0
-local.node_modules
+local.ns
 mongod.lock

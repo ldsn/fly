@@ -4,9 +4,15 @@
   "private": true,
   "dependencies": {
     "antd": "^3.0.0",
+    "classnames": "^2.2.5",
+    "core-wrappers": "^1.1.5",
+    "immutable": "^3.8.2",
+    "mobx": "^3.4.1",
+    "ramda": "^0.25.0",
     "react": "^16.2.0",
     "react-app-rewired": "^1.3.6",
     "react-dom": "^16.2.0",
+    "react-router": "^4.2.0",
     "react-scripts": "1.0.17"
   },
   "scripts": {
@@ -17,6 +23,8 @@
   },
   "devDependencies": {
     "babel-plugin-import": "^1.6.2",
+    "eslint": "^4.13.0",
+    "eslint-plugin-react": "^7.5.1",
     "react-app-rewire-less": "^2.1.0"
   }
 }

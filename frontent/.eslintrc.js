@@ -3,7 +3,8 @@ module.exports = {
     browser: true,
     es6: true
   },
-  extends: 'eslint:recommended',
+  parser: 'babel-eslint',
+  extends: ['eslint:recommended', 'plugin:react/recommended'],
   parserOptions: {
     ecmaFeatures: {
       experimentalObjectRestSpread: true,
@@ -16,7 +17,6 @@ module.exports = {
     indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
-    semi: ['error', 'always'],
-    'no-unused-vars': ['warn']
+    semi: ['error', 'always']
   }
 };

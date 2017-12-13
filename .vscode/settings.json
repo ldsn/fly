@@ -1,4 +1,6 @@
 {
   "editor.formatOnSave": true,
-  "prettier.eslintIntegration": true
+  "prettier.eslintIntegration": true,
+  "prettier.trailingComma": "none",
+  "javascript.implicitProjectConfig.experimentalDecorators": true
 }

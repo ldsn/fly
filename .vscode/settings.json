@@ -1,6 +1,10 @@
 {
-  "editor.formatOnSave": true,
-  "prettier.eslintIntegration": true,
-  "prettier.trailingComma": "none",
-  "javascript.implicitProjectConfig.experimentalDecorators": true
+    "eslint.enable": false,
+    "tslint.enable": true,
+    "typescript.format.enable": true,
+    "editor.formatOnSave": true,
+    "prettier.singleQuote": true,
+    "prettier.semi": true,
+    "prettier.trailingComma": "all",
+    "prettier.tabWidth": 2,
 }

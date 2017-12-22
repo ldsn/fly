@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Button } from 'antd';
 import Hello from './components/Hello';
 import './App.css';
 
@@ -16,6 +17,7 @@ class App extends React.Component {
           To get started, edit <code>src/App.tsx</code> and save to reload.
         </p>
         <Hello name="ldj" enthusiasmLevel={10} />
+        <Button type="primary">Button</Button>
       </div>
     );
   }

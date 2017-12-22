@@ -6180,6 +6180,12 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/trim-right/download/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
 
+ts-import-plugin@^1.4.3:
+  version "1.4.3"
+  resolved "http://registry.npm.taobao.org/ts-import-plugin/download/ts-import-plugin-1.4.3.tgz#4d8ead922c65fe919f7a932e0c9224848b969cee"
+  dependencies:
+    tslib "^1.7.1"
+
 ts-jest@^20.0.7:
   version "20.0.14"
   resolved "http://registry.npm.taobao.org/ts-jest/download/ts-jest-20.0.14.tgz#9e82130cea6b6df718b2c2b6055452af46bb248d"
